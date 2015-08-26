@@ -35,7 +35,7 @@ public class TZStackView: UIView {
     
     public var alignment: TZStackViewAlignment = .Fill
 
-    public var spacing: CGFloat = 0
+    @IBInspectable public var spacing: CGFloat = 0
     
     var layoutMarginsRelativeArrangement = false
 
@@ -301,7 +301,15 @@ public class TZStackView: UIView {
     }
 
     required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)!
+        let arrSubviews = self.subviews
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+        
+        for view in arrSubviews {
+            self.addArrangedSubview(view)
+        }
     }
     
     private func addSpacerView() -> TZSpacerView {
